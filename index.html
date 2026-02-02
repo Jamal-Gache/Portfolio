@@ -3,82 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jamal Gache | CS Student</title>
+    <title>Jamal Gache | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2d3436;
-            --accent: #0984e3;
-            --bg: #dfe6e9;
-            --text: #636e72;
+            /* Woodland Palette */
+            --wood-dark: #3E2723;   /* Dark Coffee/Wood */
+            --wood-med: #5D4037;    /* Medium Wood */
+            --wood-light: #8D6E63;  /* Light Wood Accent */
+            --leaf-green: #558B2F;  /* Fresh Leaf */
+            --paper-bg: #F5F5F5;    /* Off-white paper */
+            --card-bg: #FFFFFF;     /* White */
+            --text-main: #3E2723;
+            --text-muted: #6D4C41;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; background: var(--bg); color: var(--primary); }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        header { text-align: center; padding: 50px 0; }
-        h1 { margin: 0; font-size: 2.5rem; color: var(--primary); }
-        .subtitle { font-size: 1.2rem; color: var(--accent); margin-top: 10px; }
+
+        body { 
+            font-family: 'Georgia', serif; /* Serif font for that "written" feel */
+            line-height: 1.6; 
+            margin: 0; 
+            background: var(--paper-bg); 
+            color: var(--text-main); 
+            overflow-x: hidden; /* Prevent scrollbar from leaves */
+        }
+
+        /* Layout */
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 10; }
         
-        .card { background: white; padding: 25px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h2 { border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-top: 0; }
+        /* Header & Nav */
+        header { text-align: center; padding: 60px 0 40px; border-bottom: 3px solid var(--wood-light); margin-bottom: 40px; }
+        h1 { margin: 0; font-size: 3rem; color: var(--wood-dark); letter-spacing: -1px; }
+        .subtitle { font-size: 1.3rem; color: var(--wood-med); margin-top: 10px; font-style: italic; }
         
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .project-item { background: #f1f2f6; pading: 15px; border-radius: 5px; }
+        .social-links { margin-top: 20px; }
+        .social-btn { 
+            display: inline-block; 
+            margin: 0 10px; 
+            color: var(--wood-med); 
+            font-size: 1.5rem; 
+            transition: transform 0.2s, color 0.2s; 
+        }
+        .social-btn:hover { color: var(--leaf-green); transform: translateY(-3px); }
+
+        /* Sections */
+        .section-title { 
+            display: flex; 
+            align-items: center; 
+            color: var(--wood-dark); 
+            margin-bottom: 25px; 
+            font-size: 1.8rem;
+        }
+        .section-title::after { content: ''; flex: 1; height: 2px; background: var(--wood-light); margin-left: 15px; opacity: 0.5; }
         
-        .btn { display: inline-block; background: var(--accent); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; }
-        .btn:hover { background: #0769b5; }
-        
-        footer { text-align: center; padding: 20px; color: var(--text); font-size: 0.9rem; }
+        .card { 
+            background: var(--card-bg); 
+            padding: 30px; 
+            margin-bottom: 30px; 
+            border-radius: 4px; 
+            box-shadow: 0 4px 10px rgba(62, 39, 35, 0.08); /* Soft brown shadow */
+            border-left: 5px solid var(--wood-light);
+        }
+
+        /* Projects Grid */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .project-item { 
+            background: #FAFAFA; 
+            padding: 20px; 
+            border: 1px solid #E0E0E0; 
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+        .project-item:hover { transform: translateY(-3px); border-color: var(--leaf-green); }
+        .tech-tag { 
+            display: inline-block; 
+            background: var(--leaf-green); 
+            color: white; 
+            padding: 4px 10px; 
+            border-radius: 12px; 
+            font-size: 0.8rem; 
+            margin-top: 10px;
+            font-family: sans-serif;
+        }
+
+        /* Resume Specific Styles */
+        .resume-item { margin-bottom: 20px; border-bottom: 1px dashed #D7CCC8; padding-bottom: 15px; }
+        .resume-item:last-child { border-bottom: none; }
+        .role-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+        .role-title { font-weight: bold; font-size: 1.1rem; color: var(--wood-dark); }
+        .role-date { font-family: sans-serif; font-size: 0.9rem; color: var(--text-muted); }
+        .role-company { color: var(--leaf-green); font-weight: bold; display: block; margin-bottom: 5px;}
+
+        /* Button */
+        .btn-link { 
+            display: inline-block; 
+            margin-top: 10px; 
+            text-decoration: none; 
+            color: var(--leaf-green); 
+            font-weight: bold; 
+            border-bottom: 2px solid transparent; 
+        }
+        .btn-link:hover { border-bottom-color: var(--leaf-green); }
+
+        /* Falling Leaves Container */
+        #leaves-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1; /* Behind content but visible on sides */
+            overflow: hidden;
+        }
+        .leaf {
+            position: absolute;
+            top: -50px;
+            font-size: 20px;
+            opacity: 0.6;
+            animation: fall linear infinite;
+        }
+        /* Animation Keyframes */
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Footer */
+        footer { text-align: center; padding: 40px; color: var(--wood-light); font-size: 0.9rem; font-family: sans-serif; }
     </style>
 </head>
 <body>
 
+    <div id="leaves-container"></div>
+
     <div class="container">
         <header>
             <h1>Jamal Gache</h1>
-            <div class="subtitle">Computer Science Student | Gettysburg College</div>
+            <div class="subtitle">Computer Science Student | Systems Thinker | Developer</div>
+            
+            <div class="social-links">
+                <a href="https://thewritingsofjamalmark.blogspot.com" target="_blank" class="social-btn" title="Blog"><i class="fas fa-pen-nib"></i></a>
+                <a href="https://www.linkedin.com/in/jamal-gache-b44377254/" target="_blank" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/Jamal-Gache" target="_blank" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
         </header>
 
-        <div class="card">
-            <h2>About Me</h2>
-            <p>I am a Computer Science major currently focusing on bridging the gap between theoretical coursework and practical application. My current focus is on systems durability, academic recovery, and technical projects that solve real-world problems.</p>
-        </div>
+        <section class="card">
+            <div class="section-title">About Me</div>
+            <p>I am a Computer Science major at Gettysburg College, currently focused on the intersection of technical systems and human durability. With a background in community leadership and full-stack development, I build tools that solve logistical problems—whether that's repurposing hardware for schools or creating digital workflows for academic recovery.</p>
+        </section>
 
-        <div class="card">
-            <h2>Current Projects</h2>
+        <section class="card">
+            <div class="section-title">Technical Projects</div>
             <div class="project-grid">
                 
                 <div class="project-item">
-                    <h3>Chromebook Restoration Initiative</h3>
-                    <p>Developed a project to restore and repurpose unused Chromebooks for my former high school, extending hardware lifecycles and reducing e-waste.</p>
-                    <span class="btn">Hardware / Logistics</span>
+                    <div class="role-title">WebJotter</div>
+                    <p>A browser extension enabling persistent annotations across web pages. Designed frontend in React and backend with Supabase/PostgreSQL.</p>
+                    <div class="tech-tag">React</div> <div class="tech-tag">Supabase</div>
                 </div>
 
                 <div class="project-item">
-                    <h3>Roblox Game Dev</h3>
-                    <p>Currently developing a simulation game inspired by <em>Animal Crossing: New Horizons</em>. Focusing on Lua scripting and game loop logic.</p>
-                    <span class="btn">Lua / Game Design</span>
+                    <div class="role-title">Chromebook Restoration</div>
+                    <p>Restoration initiative for ICSA high school. Repurposing unused hardware to extend lifecycles and reduce e-waste.</p>
+                    <div class="tech-tag">Hardware Logistics</div>
                 </div>
 
                 <div class="project-item">
-                    <h3>The "Sustain" Dashboard</h3>
-                    <p>Built a Notion-based productivity system to track personal metrics, habit continuity, and academic roadmap milestones.</p>
-                    <span class="btn">Productivity Systems</span>
+                    <div class="role-title">Animal Crossing Sim</div>
+                    <p>Lua-based simulation game development on Roblox. Focusing on game loops, inventory systems, and player interaction.</p>
+                    <div class="tech-tag">Lua / Game Dev</div>
+                </div>
+
+                <div class="project-item">
+                    <div class="role-title">"Sustain" Dashboard</div>
+                    <p>A Notion-based productivity architecture tracking habit continuity and academic milestones.</p>
+                    <div class="tech-tag">Productivity Systems</div>
                 </div>
 
             </div>
-        </div>
+        </section>
 
-        <div class="card">
-            <h2>Connect</h2>
-            <p>Open to academic collaborations and internship opportunities for Summer 2026.</p>
-            <a href="mailto:your-email@example.com" class="btn">Email Me</a>
+        <section class="card">
+            <div class="section-title">Experience</div>
+            
+            <div class="resume-item">
+                <div class="role-header">
+                    <span class="role-title">Curriculum Design & Data Analysis</span>
+                    <span class="role-date">July 2025</span>
+                </div>
+                <span class="role-company">Africa2080</span>
+                <ul>
+                    <li>Contributed to curriculum development for a forward-thinking educational non-profit.</li>
+                    <li>Analyzed data to improve program delivery and impact measurement.</li>
+                </ul>
             </div>
+
+            <div class="resume-item">
+                <div class="role-header">
+                    <span class="role-title">Garthwait Leadership Center Fellow</span>
+                    <span class="role-date">2024</span>
+                </div>
+                <span class="role-company">Gettysburg College</span>
+                <ul>
+                    <li>Facilitated group dynamics and leadership training for student peers.</li>
+                    <li>Developed workshops on effective communication and team cohesion.</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <div class="role-header">
+                    <span class="role-title">Student Council Secretary</span>
+                    <span class="role-date">2022 - 2023</span>
+                </div>
+                <span class="role-company">ICSA (Abidjan)</span>
+                <ul>
+                    <li>Organized high-impact charity events including Blood Drives (70 pints) and fundraisers ($2,500+).</li>
+                    <li>Served as primary liaison between student body and administration.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="section-title">Awards & Honors</div>
+            
+            <div class="resume-item">
+                <div class="role-header">
+                    <span class="role-title">First Place Winner - YCP Hacks</span>
+                    <span class="role-date">Nov 2024</span>
+                </div>
+                <p>Awarded $1,000 USD prize for <strong>York Note</strong>, a collaborative full-stack academic note-sharing platform. Built during a Major League Hacking (MLH) event.</p>
+            </div>
+
+            <div class="resume-item">
+                <div class="role-header">
+                    <span class="role-title">Virginia Woolf Essay Prize</span>
+                    <span class="role-date">April 2025</span>
+                </div>
+                <p>Awarded for excellence in literary nonfiction and argumentative clarity.</p>
+            </div>
+
+            <div class="resume-item">
+                <div class="role-header">
+                    <span class="role-title">Presidential Scholar</span>
+                    <span class="role-date">2023 - 2025</span>
+                </div>
+                <p>Gettysburg College academic scholarship recipient.</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="section-title">Education</div>
+            
+            <div class="resume-item">
+                <div class="role-header">
+                    <span class="role-title">Gettysburg College</span>
+                    <span class="role-date">Expected 2028</span>
+                </div>
+                <p><strong>Bachelor of Science in Computer Science</strong><br>
+                Relevant Coursework: Calculus II, Multivariable Calculus, Computer Science I.</p>
+            </div>
+
+            <div class="resume-item">
+                <div class="role-header">
+                    <span class="role-title">Arizona State University (Online)</span>
+                    <span class="role-date">Fall 2025</span>
+                </div>
+                <p>Completed coursework in Data Structures & Algorithms and Computer Organization (6 Credits).</p>
+            </div>
+        </section>
 
     </div>
 
     <footer>
-        &copy; 2026 Jamal Gache. Built with HTML/CSS. Deployed on Netlify.
+        &copy; 2026 Jamal Gache. Operating at the intersection of Code & Resilience.
     </footer>
 
-</body>
+    <script>
+        function createLeaf() {
+            const container = document.getElementById('leaves-container');
+            const leaf = document.createElement('div');
+            leaf.classList.add('leaf');
+            
+            // Randomly choose leaf type and color
+            const leafTypes = ['🍂', '🍃', '🍁'];
+            leaf.innerText = leafTypes[Math.floor(Math.random() * leafTypes.length)];
+            
+            // Random Position (Left side or Right side only)
+            // We want to avoid the center text area (roughly 10-90vw)
+            const side = Math.random() > 0.5 ? 'left' : 'right';
+            const position = side === 'left' ? Math.random() * 15 : 85 + Math.random() * 15;
+            
+            leaf.style.left = position + 'vw';
+            
+            // Random Animation Duration
+            leaf.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 5-10 seconds
+            leaf.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            
+            container.appendChild(leaf);
 
+            // Remove leaf after animation
+            setTimeout(() => {
+                leaf.remove();
+            }, 10000);
+        }
+
+        // Create a leaf every 400ms
+        setInterval(createLeaf, 400);
+    </script>
+</body>
 </html>
